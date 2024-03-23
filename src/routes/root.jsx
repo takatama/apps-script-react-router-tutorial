@@ -9,6 +9,7 @@ import {
 } from "react-router-dom";
 import { getContacts, createContact } from "../contacts";
 import { useEffect } from "react";
+import UrlSync from "./url-sync";
 
 export async function loader({ request }) {
   const url = new URL(request.url);
@@ -37,6 +38,7 @@ export default function Root() {
 
   return (
     <>
+      <UrlSync />
       <div id="sidebar">
         <h1>React Router Contacts</h1>
         <div>
