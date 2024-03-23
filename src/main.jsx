@@ -2,7 +2,7 @@ import * as React from "react";
 import * as ReactDOM from "react-dom/client";
 import {
   createRoutesFromElements,
-  createBrowserRouter,
+  createHashRouter,
   Route,
   RouterProvider,
 } from "react-router-dom";
@@ -20,7 +20,7 @@ import EditContact, { action as editAction } from "./routes/edit";
 import { action as destroyAction } from "./routes/destroy";
 import Index from "./routes/index";
 
-const router = createBrowserRouter(
+const router = createHashRouter(
   createRoutesFromElements(
     <Route
       path="/"
