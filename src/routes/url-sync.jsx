@@ -1,11 +1,24 @@
 import { useEffect } from "react";
-import { useLocation } from "react-router";
+import { useNavigate, useLocation } from "react-router";
 
 export default function UrlSync() {
+  const navigate = useNavigate();
+
+  function replace(hash) {
+    navigate(hash, { replace: true });
+  }
+
+  // write before useEffect for location
+  useEffect(() => {
+    if (window.google) {
+      google.script.url.getLocation((location) => replace(location.hash));
+      google.script.history.setChangeHandler((e) => replace(e.location.hash));
+    }
+  }, []);
+
   const location = useLocation();
 
   useEffect(() => {
-    console.log("new location: ", location);
     if (window.google) {
       google.script.history.replace(
         { timestamp: new Date().getTime() },
