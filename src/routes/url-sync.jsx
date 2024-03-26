@@ -8,7 +8,6 @@ export default function UrlSync() {
     navigate(hash, { replace: true });
   }
 
-  // write before useEffect for location
   useEffect(() => {
     if (window.google) {
       google.script.url.getLocation((location) => replace(location.hash));
@@ -20,6 +19,9 @@ export default function UrlSync() {
 
   useEffect(() => {
     if (window.google) {
+      // ignore the first access
+      if (location.pathname === "/" && location.key === "default") return;
+      console.log("location changed", location);
       google.script.history.replace(
         { timestamp: new Date().getTime() },
         null,
